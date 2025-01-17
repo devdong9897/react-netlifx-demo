@@ -6,6 +6,7 @@ import { useUpcomingMovieQuery } from "../../../../hooks/useUpcomingMovies";
 
 const UpcomingMovieSlide = () => {
   const { data, isLoading, isError, error } = useUpcomingMovieQuery();
+  console.log("ddd", data);
 
   if (isLoading) {
     return <h1>Loading...</h1>;

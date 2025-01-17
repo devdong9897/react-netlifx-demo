@@ -45,10 +45,10 @@ const AppLayout = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* route안에 있는 자손들을 갖고오게 도와준다 */}
       <div
         style={{ backgroundColor: "black", color: "white", minHeight: "100vh" }}
       >
+        {/* route안에 있는 자손들을 갖고오게 도와준다 */}
         <Outlet />
       </div>
     </div>
