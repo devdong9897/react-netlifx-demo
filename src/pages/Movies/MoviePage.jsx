@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSearchMovieQuery } from "../../hooks/useSearchMovie";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
@@ -6,6 +6,7 @@ import Alert from "react-bootstrap/Alert";
 import "./MoviePage.style.css";
 import { Col, Container, Row } from "react-bootstrap";
 import MovieCard from "../../common/MovieCard/MovieCard";
+import ReactPaginate from "react-paginate";
 
 // 경로 2가지
 // nav바에서 클릭해서 온 경우 => popularMovie 보여주기
@@ -18,10 +19,19 @@ import MovieCard from "../../common/MovieCard/MovieCard";
 const MoviePage = () => {
   // 쿼리 읽어오는 state
   const [query, setQuery] = useSearchParams();
+  // page네이션 state
+  const [page, setPage] = useState(1);
   const keyword = query.get("q");
 
-  const { data, isLoading, isError, error } = useSearchMovieQuery({ keyword });
+  const { data, isLoading, isError, error } = useSearchMovieQuery({
+    keyword,
+    page,
+  });
   console.log("qqq", data);
+
+  const handlePageClick = ({ selected }) => {
+    setPage(selected + 1);
+  };
 
   if (isLoading) {
     return (
@@ -53,6 +63,27 @@ const MoviePage = () => {
               </Col>
             ))}
           </Row>
+          <ReactPaginate
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={data?.total_pages} // 전체 페이지가 몇개인지
+            previousLabel="< previous"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+            forcePage={page - 1}
+          />
         </Col>
       </Row>
     </Container>
