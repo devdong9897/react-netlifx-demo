@@ -2,3 +2,15 @@
   max-width: 100%;
   height: auto;
 }
+
+.grade {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid white;
+}
+
+.content p {
+  border-bottom: 1px solid white;
+}

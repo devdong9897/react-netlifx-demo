@@ -3,8 +3,10 @@ import { useMovieDetailQuery } from "../../hooks/useMovieDetail";
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 import { useParams } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
 import "./MovieDetailPage.style.css";
+import MovieDetailTitle from "./components/MovieDetailTitle";
+import MovieDetailReview from "./components/MovieDetailReview";
+import MovieDetailVideos from "./components/MovieDetailVideos";
 
 const MovieDetailPage = () => {
   const { id } = useParams();
@@ -31,25 +33,9 @@ const MovieDetailPage = () => {
 
   return (
     <div>
-      <Row className="justify-content-center g-0">
-        <Col
-          xs={12}
-          md={8}
-          className="d-flex justify-content-center align-items-center"
-        >
-          <div className="detail-img">
-            <img
-              src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${data.poster_path}`}
-              alt="포스터"
-            />
-          </div>
-        </Col>
-        <Col> 
-          <div className="content">
-            <h1>{data.title}</h1>
-          </div>
-        </Col>
-      </Row>
+      <MovieDetailTitle movie={data} />
+      <MovieDetailReview />
+      <MovieDetailVideos />
     </div>
   );
 };
